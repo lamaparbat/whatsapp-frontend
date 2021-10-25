@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Amaranth&display=swap');
+.container{
+ height: 100vh;
+ width: 100%;
+ display: grid;
+ place-items: center;
+}
+.container .container__body{
+  text-align: center;
+  padding: 30px;
+  background-color: white;
+}
+.container .container__body h2{
+font-family: 'Special Elite', cursive;
+}
+.container .container__body button{
+ font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.container p{
+ margin-top: auto;
+ margin-left: auto;
+ font-family: 'Special Elite', cursive;
+}

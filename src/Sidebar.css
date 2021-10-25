@@ -1,0 +1,109 @@
+.sidebar{
+ height: 100vh;
+ display: flex;
+ flex: 0.35;
+ flex-direction: column;
+ border-right: 0.5px solid rgb(211, 211, 211);
+}
+.sidebar #profile{
+ height: 45px;
+ width: 45px;
+}
+.sidebar .sidebar__header{
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  color: rgb(129, 129, 129);
+  background-color: rgb(241, 241, 241);
+}
+
+.sidebar .sidebar__header #sidebar__header__right{
+ display: flex;
+ width: 150px;
+ justify-content: space-around;
+ align-items: center;
+}
+.sidebar .sidebar__header #sidebar__header__right #refreshIcon{
+  font-size: 28px;
+}
+.sidebar .sidebar__header #sidebar__header__right #refreshIcon,
+.sidebar .sidebar__header #sidebar__header__right #messageIcon,
+.sidebar .sidebar__header #sidebar__header__right #moreIcon{
+  cursor: pointer;
+}
+.sidebar .sidebar__header #sidebar__header__right #refreshIcon:hover,
+.sidebar .sidebar__header #sidebar__header__right #messageIcon:hover,
+.sidebar .sidebar__header #sidebar__header__right #moreIcon:hover{
+  color: rgb(19, 13, 13);
+}
+
+.sidebar .SearchBar{
+ padding: 15px;
+ text-align: center;
+ background-color: rgb(245, 245, 245);
+}
+.sidebar .SearchBar div{
+ display: flex;
+ background-color: white;
+ border-radius: 20px;
+ overflow: hidden;
+ align-items: center;
+}
+.sidebar .SearchBar div #searchIcon{
+ margin-left: 20px;
+}
+.sidebar .SearchBar div input{
+ padding: 15px;
+ width: 100%;
+ border: none;
+ outline: none;
+}
+.sidebar .siderbar_chathead{
+ padding-left: 15px;
+ padding-right: 20px;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ background-color: white;
+ border-bottom: 0.5px solid rgb(209, 209, 209);
+ cursor: pointer;
+}
+.sidebar .siderbar_chathead:hover{
+  background-color: rgb(245, 245, 245);
+}
+.sidebar .siderbar_chathead .left{
+ display: flex;
+}
+.sidebar .siderbar_chathead .left #message{
+ width: 250px;
+ margin-top: 3px;
+ margin-left: 15px;
+}
+.sidebar .siderbar_chathead .left #message p{
+ color: rgb(71, 71, 71);
+ font-size: 15px;
+}
+
+.sidebar .siderbar_chathead .right{
+  font-size: 13px;
+  color: rgb(71, 71, 71);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.sidebar .siderbar_chathead .right #message_count{
+  margin-top: 5px;
+  padding-top: 3px;
+  padding-left: 1px;
+  padding-right: 2px;
+  height: 20px;
+  width: 20px;
+  color: white;
+  background-color: rgb(41, 226, 41);
+  border-radius: 50%;
+}
+@media(max-width:1100px){
+ .sidebar{
+  flex: 1;
+ }
+}
