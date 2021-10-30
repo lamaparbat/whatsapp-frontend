@@ -4,11 +4,13 @@ import { Avatar } from '@material-ui/core';
 import { CachedOutlined, ExitToApp, MessageOutlined, SearchOutlined } from '@material-ui/icons';
 import { useDispatch } from 'react-redux';
 import selectedChat from './redux/actions/actions';
+import Profile from './Profile';
 import './Sidebar.css';
 
 function Sidebar({ users, user }) {
    const history = useHistory()
    const dispatch = useDispatch()
+   const [visibleProfile, setVisibleProfile] = useState(false)
    const curUser = JSON.parse(localStorage.getItem("userData"))
    
    //logout
@@ -20,12 +22,17 @@ function Sidebar({ users, user }) {
       }))
       history.push("/Login")
    }
+   
+   //view profile
+   const viewProfile = () => {
+      setVisibleProfile(true)
+   }
 
    const Header = ({ user }) => {
       return (
          <>
             <div className="sidebar__header">
-               <Avatar id="profile" src={user.profile} />
+               <Avatar id="profile" src={user.profile} onClick={viewProfile} />
                <div id="sidebar__header__right">
                   <CachedOutlined id="refreshIcon" />
                   <MessageOutlined id="messageIcon" />
@@ -87,13 +94,18 @@ function Sidebar({ users, user }) {
    
    return (
       <div className="sidebar">
-         <Header user={user} />
-         <SearchBar />
          {
-            users ? users.map((data, index) => data.email !== curUser.email ?
-               <ChatHead name={data.name} message={""} profile={data.profile} email={data.email} online="12:30 pm" count={2} key={index} />
-            : null
-            ) : null
+            visibleProfile ? <Profile user={user} /> :
+               <>
+                  <Header user={user} />
+                  <SearchBar />
+                  {
+                     users ? users.map((data, index) => data.email !== curUser.email ?
+                        <ChatHead name={data.name} message={""} profile={data.profile} email={data.email} online="12:30 pm" count={2} key={index} />
+                        : null
+                     ) : null
+                  }
+               </>
          }
       </div>
    )

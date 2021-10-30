@@ -9,6 +9,9 @@
  height: 45px;
  width: 45px;
 }
+.sidebar #profile:hover{
+  cursor: pointer;
+}
 .sidebar .sidebar__header{
   padding: 15px;
   display: flex;

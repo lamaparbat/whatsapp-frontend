@@ -11,7 +11,7 @@ import Picker from 'emoji-picker-react';
 
 
 function Chat() {
-  const [message, setMessageInput] = useState() 
+  const message =  useRef()
   const history = useHistory()
   const state = useSelector((state) => state.state)
   const [messages, setMessage] = useState([]);
@@ -27,12 +27,6 @@ function Chat() {
     profile: ""
   })
 
-  //message input key listenter
-  const setInputMessage = (e) => {
-    setMessageInput(e.target.value)
-    console.log(e.target.value)
-  }
-  
   //selected emoji
   const onEmojiClick = (event, emojiObject) => {
     setChosenEmoji(emojiObject);
@@ -200,8 +194,7 @@ function Chat() {
           <input
             type="text"
             className="input form-control mx-2"
-            onChange={setInputMessage}
-            value={message}
+            ref={message}
             placeholder="Enter a message...." />
           <SendOutlined className="sendIcon mx-3" onClick={sendMessage} />
         </div>
