@@ -173,7 +173,7 @@ function Chat() {
       e.preventDefault()
       const data = message.current.value;
       //send message to server using post http request
-      await axios.post("https://whatsapp-clone-2b15a.firebaseapp.com/sendMessage", {
+      await axios.post("https://whatsapp-backendversion.herokuapp.com/sendMessage", {
         sender: JSON.parse(localStorage.getItem("userData")).email,
         reciever: chatHead.reciever,
         message: data,
