@@ -27,6 +27,7 @@ function Chat() {
     profile: ""
   })
 
+  console.log(chosenEmoji)
   //selected emoji
   const onEmojiClick = (event, emojiObject) => {
     setChosenEmoji(emojiObject);
@@ -45,7 +46,7 @@ function Chat() {
   useEffect(() => {
     //retrieving messages
     axios.create({
-      baseURL: "http://localhost:8000"
+      baseURL: "https://whatsapp-backendversion.herokuapp.com/"
     }).get("/getMessage").then((response) => {
       setMessage(response.data);
     })
@@ -110,14 +111,13 @@ function Chat() {
     )
   }
 
-  // data.reciever === chatHead.reciever && data.sender === props.data.data.user.email || data.reciever === chatHead.sender && data.sender === chatHead.reciever
   const MessageContainer = () => {
     return (
       <>
         <div className="messageContainer">
           {
             state ? messages.map((data) => (
-              (data.reciever === chatHead.reciever && data.sender === curUser || data.reciever === chatHead.sender && data.sender === chatHead.reciever) ?
+              ((data.reciever === chatHead.reciever && data.sender === curUser) || (data.reciever === chatHead.sender && data.sender === chatHead.reciever)) ?
                 <Message
                   key={data._id}
                   name={data.name}
@@ -173,7 +173,7 @@ function Chat() {
       e.preventDefault()
       const data = message.current.value;
       //send message to server using post http request
-      await axios.post("http://localhost:8000/sendMessage", {
+      await axios.post("https://whatsapp-clone-2b15a.firebaseapp.com/", {
         sender: JSON.parse(localStorage.getItem("userData")).email,
         reciever: chatHead.reciever,
         message: data,

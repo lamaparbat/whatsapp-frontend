@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react';
+import { React, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Avatar } from '@material-ui/core';
 import { CachedOutlined, ExitToApp, MessageOutlined, SearchOutlined } from '@material-ui/icons';
@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import selectedChat from './redux/actions/actions';
 import Profile from './Profile';
 import './Sidebar.css';
+import 'animate.css';
 
 function Sidebar({ users, user }) {
    const history = useHistory()

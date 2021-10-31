@@ -4,6 +4,10 @@
  flex: 0.35;
  flex-direction: column;
  border-right: 0.5px solid rgb(211, 211, 211);
+ overflow-y: scroll;
+}
+.sidebar::-webkit-scrollbar{
+ display: none;
 }
 .sidebar #profile{
  height: 45px;

@@ -20,12 +20,13 @@ function Login() {
       .then((data) => {
         //sending user data to server
         axios.create({
-          baseURL: "http://localhost:8000"
+          baseURL: "https://whatsapp-backendversion.herokuapp.com/"
         }).post("/createNewUser", {
           name: data.user._delegate.displayName,
           email: data.user._delegate.email,
           profile: data.user._delegate.photoURL
         }).then(res => {
+          console.log(res)
           if (res.data.created) {
             localStorage.setItem("userData", JSON.stringify(res.data.data))
             history.push("/Home")
