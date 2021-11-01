@@ -1,12 +1,13 @@
 import { React, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Avatar } from '@material-ui/core';
-import { CachedOutlined, ExitToApp, MessageOutlined, SearchOutlined } from '@material-ui/icons';
+import { CachedOutlined, ExitToApp, FiberManualRecord, MessageOutlined, SearchOutlined } from '@material-ui/icons';
 import { useDispatch } from 'react-redux';
-import selectedChat from './redux/actions/actions';
+import { selectedChat } from './redux/actions/actions';
 import Profile from './Profile';
 import './Sidebar.css';
 import 'animate.css';
+import axios from 'axios';
 
 function Sidebar({ users, user }) {
    const history = useHistory()
@@ -16,11 +17,16 @@ function Sidebar({ users, user }) {
    
    //logout
    const logout = () => {
+      //send logout message to server
+      axios.post("https://whatsapp-backendversion.herokuapp.com/logout", curUser);
+      
+      //reset the cache
       localStorage.setItem("userData", JSON.stringify({
          name: "",
          email: "",
          profile: ""
       }))
+      
       history.push("/Login")
    }
    
@@ -64,13 +70,12 @@ function Sidebar({ users, user }) {
             <div className="siderbar_chathead" onClick={() => selectChat(props)}>
                <div className="left">
                   <Avatar className="my-2" id="profile" src={props.profile} />
-                  <div className="pt-2" id="message">
+                  <div className="pt-3" id="message">
                      <span><strong>{props.name}</strong></span>
-                     <p>{props.message}</p>
                   </div>
                </div>
                <div className="right">
-                  <span>{props.online}</span>
+                  <span>{props.online ? <FiberManualRecord className="text-success" /> : props.timestamp.slice(0, 4) + props.timestamp.slice(7, 12) }</span>
                </div>
             </div>
          </>
@@ -102,7 +107,7 @@ function Sidebar({ users, user }) {
                   <SearchBar />
                   {
                      users ? users.map((data, index) => data.email !== curUser.email ?
-                        <ChatHead name={data.name} message={""} profile={data.profile} email={data.email} online="12:30 pm" count={2} key={index} />
+                        <ChatHead name={data.name} online={data.online} profile={data.profile} email={data.email} timestamp={data.timestamp} count={2} key={index} />
                         : null
                      ) : null
                   }

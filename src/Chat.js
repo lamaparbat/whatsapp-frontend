@@ -27,7 +27,6 @@ function Chat() {
     profile: ""
   })
 
-  console.log(chosenEmoji)
   //selected emoji
   const onEmojiClick = (event, emojiObject) => {
     setChosenEmoji(emojiObject);

@@ -1,13 +1,15 @@
 import { React, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { auth, provider } from './firebase.js';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import './Login.css';
 
 function Login() {
   const history = useHistory()
+  const dispatch = useDispatch();
   
-  useEffect(() => {
+  useEffect(async() => {
     if (JSON.parse(localStorage.getItem("userData")) && JSON.parse(localStorage.getItem("userData")).email) {
       history.push("/Home")
     } else {
@@ -18,15 +20,16 @@ function Login() {
   const loginGoogle = () => {
     auth.signInWithPopup(provider)
       .then((data) => {
-        //sending user data to server
+        //sending user data to server https://whatsapp-backendversion.herokuapp.com/
         axios.create({
           baseURL: "https://whatsapp-backendversion.herokuapp.com/"
         }).post("/createNewUser", {
           name: data.user._delegate.displayName,
           email: data.user._delegate.email,
-          profile: data.user._delegate.photoURL
+          profile: data.user._delegate.photoURL,
+          online: true,
+          timestamp:null
         }).then(res => {
-          console.log(res)
           if (res.data.created) {
             localStorage.setItem("userData", JSON.stringify(res.data.data))
             history.push("/Home")
